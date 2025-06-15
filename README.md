@@ -59,15 +59,12 @@ while True:
     if not ip:  
         break
 
-    try:
-        mac = address[ip]  # Get the MAC address for the IP
-        print(f"IP: {ip} -> MAC: {mac}")
-        c.send(mac.encode())  
-    except KeyError:
-        print(f"IP: {ip} not found in ARP table.")
-        c.send("Not Found".encode())
+    print(f"Received IP: {ip}")
+
+    mac = address.get(ip, "MAC address not found")
+    c.send(mac.encode())
+
 c.close()
-s.close()
 ```
 ## OUPUT - ARP
 ![Screenshot 2025-03-17 060840](https://github.com/user-attachments/assets/bf0aa743-9a38-42c6-8524-2123e173a950)
